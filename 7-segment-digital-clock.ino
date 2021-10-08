@@ -21,15 +21,6 @@ Adafruit_NeoPixel strip = Adafruit_NeoPixel(PIXELS_PER_SEGMENT * 7 * PIXELS_DIGI
 Adafruit_NeoPixel logostrip = Adafruit_NeoPixel(LOGO_NUMBER_PIXEL, LOGO_PIN, NEO_GRB + NEO_KHZ800); // for logobox
 Adafruit_NeoPixel twodot = Adafruit_NeoPixel(TWODOT_PIXEL, TWODOT_PIN, NEO_GRB + NEO_KHZ800); // for two dots to make up a time. 
 
-//Pixel Arrangement
-/*
-          b
-        a   c
-          g
-        f   d
-          e
-*/
-
 // Segment array
 byte segments[7] = {
   //abcdefg
