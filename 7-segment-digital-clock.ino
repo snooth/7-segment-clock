@@ -1,5 +1,6 @@
 // The Dogg 2021
 // 7 segment clock - polling DS1307RTC
+// Uses Ardufruit Neopixel Library
 
 
 #include <Adafruit_NeoPixel.h>
@@ -99,27 +100,6 @@ void loop() {
     disp_Digit2(hourTwo);
   }
 
-  /*
-  // for loop testing purposes ONLY
-  for (int i = 15; i > 0; i--) {
-    int a = i / 10;
-    int b = i % 10;
-    if (a != 0) {
-      // display LED digits
-      clearDisplay2(); // clear all the pixels first
-      disp_Digit1(a);
-      disp_Digit2(b);
-    }else {
-      clearDisplay2(); // clear all the pixels first
-      disp_Digit2(b);
-    }
-    
-    delay(1000);
-    clearDisplay2();
-    
-  }*/
-  
-
   // GET AND DISPLAY MINUTES
   // get minute and split two digits into single digits
   int newMinute = getMinute();
@@ -130,8 +110,6 @@ void loop() {
 
   // this makes the two dots flash
   clearDots();
-
-
 }
 
 //Clear all the Pixels
@@ -145,21 +123,9 @@ void clearDisplay2() {
 
 // Rainbow cycle along whole strip. Pass delay time (in ms) between frames.
 void logoRainbow(int wait) {
-  // Hue of first pixel runs 5 complete loops through the color wheel.
-  // Color wheel has a range of 65536 but it's OK if we roll over, so
-  // just count from 0 to 5*65536. Adding 256 to firstPixelHue each time
-  // means we'll make 5*65536/256 = 1280 passes through this outer loop:
   for(long firstPixelHue = 0; firstPixelHue < 5*65536; firstPixelHue += 256) {
     for(int i=0; i<logostrip.numPixels(); i++) { // For each pixel in strip...
-      // Offset pixel hue by an amount to make one full revolution of the
-      // color wheel (range of 65536) along the length of the strip
-      // (strip.numPixels() steps):
       int pixelHue = firstPixelHue + (i * 65536L / logostrip.numPixels());
-      // strip.ColorHSV() can take 1 or 3 arguments: a hue (0 to 65535) or
-      // optionally add saturation and value (brightness) (each 0 to 255).
-      // Here we're using just the single-argument hue variant. The result
-      // is passed through strip.gamma32() to provide 'truer' colors
-      // before assigning to each pixel:
       logostrip.setPixelColor(i, logostrip.gamma32(logostrip.ColorHSV(pixelHue)));
     }
     logostrip.show(); // Update strip with new contents
@@ -170,21 +136,9 @@ void logoRainbow(int wait) {
 
 // Rainbow cycle along whole strip. Pass delay time (in ms) between frames.
 void twoDotsRainbow(int wait) {
-  // Hue of first pixel runs 5 complete loops through the color wheel.
-  // Color wheel has a range of 65536 but it's OK if we roll over, so
-  // just count from 0 to 5*65536. Adding 256 to firstPixelHue each time
-  // means we'll make 5*65536/256 = 1280 passes through this outer loop:
   for(long firstPixelHue = 0; firstPixelHue < 5*65536; firstPixelHue += 256) {
     for(int i=0; i<twodot.numPixels(); i++) { // For each pixel in strip...
-      // Offset pixel hue by an amount to make one full revolution of the
-      // color wheel (range of 65536) along the length of the strip
-      // (strip.numPixels() steps):
       int pixelHue = firstPixelHue + (i * 65536L / twodot.numPixels());
-      // strip.ColorHSV() can take 1 or 3 arguments: a hue (0 to 65535) or
-      // optionally add saturation and value (brightness) (each 0 to 255).
-      // Here we're using just the single-argument hue variant. The result
-      // is passed through strip.gamma32() to provide 'truer' colors
-      // before assigning to each pixel:
       twodot.setPixelColor(i, logostrip.gamma32(twodot.ColorHSV(pixelHue)));
     }
     twodot.show(); // Update strip with new contents
@@ -194,21 +148,9 @@ void twoDotsRainbow(int wait) {
 
 // Rainbow cycle along whole strip. Pass delay time (in ms) between frames.
 void testDigits(int wait) {
-  // Hue of first pixel runs 5 complete loops through the color wheel.
-  // Color wheel has a range of 65536 but it's OK if we roll over, so
-  // just count from 0 to 5*65536. Adding 256 to firstPixelHue each time
-  // means we'll make 5*65536/256 = 1280 passes through this outer loop:
   for(long firstPixelHue = 0; firstPixelHue < 5*65536; firstPixelHue += 256) {
     for(int i=0; i<strip.numPixels(); i++) { // For each pixel in strip...
-      // Offset pixel hue by an amount to make one full revolution of the
-      // color wheel (range of 65536) along the length of the strip
-      // (strip.numPixels() steps):
       int pixelHue = firstPixelHue + (i * 65536L / strip.numPixels());
-      // strip.ColorHSV() can take 1 or 3 arguments: a hue (0 to 65535) or
-      // optionally add saturation and value (brightness) (each 0 to 255).
-      // Here we're using just the single-argument hue variant. The result
-      // is passed through strip.gamma32() to provide 'truer' colors
-      // before assigning to each pixel:
       strip.setPixelColor(i, strip.gamma32(strip.ColorHSV(pixelHue)));
     }
     strip.show(); // Update strip with new contents
